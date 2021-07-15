@@ -27,3 +27,6 @@ with open(csvpath) as csvfile:
         months+=1
         print(months)
 #Total Profit/Losses
+        NetTotal += int(row[1])
+        print(NetTotal)
+    
