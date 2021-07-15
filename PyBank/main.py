@@ -1,47 +1,64 @@
-#Print the budget data csv file
-import os
 import csv
-from typing import Counter
+import os
 
-csvpath = os.path.join('Resources', 'budget_data.csv')
-print(csvpath)
+max_change = "none"
+min_change = "none"
+min_month = "none"
+max_month = "none"
 
+total_months = 0
+total_amount = 0
+counter = 0
+Sum_of_Monthly_Change = 0
 
+Profit_Loss_List = []
+Monthly_Change_List =[]
+Months_List = []
 
+budget_data_path = os.path.join("Resources","budget_data.csv")
 
-with open(csvpath) as csvfile:
-    csvreader = csv.reader(csvfile, delimiter=',')
+with open(budget_data_path,"r",newline = "",encoding="utf-8") as budget_data_file:
+    budget_data_reader = csv.reader(budget_data_file,delimiter=",")
+    budget_data_header = next(budget_data_reader)
 
-    print(csvreader)
+    for rows in budget_data_reader:
+        total_months = total_months + 1
+        Profit_Loss_List.append(rows[1])
+        Months_List.append(rows[0])
+        total_amount = int(total_amount) + int(rows[1])
 
-    csv_header = next(csvreader)
-    print(f"CSV Header: {csv_header}")
-    months = 0
-    NetTotal = 0
-    MonthlyChangeSum = 0
-    counter = 0
+number_of_stored_pl_values = len(Profit_Loss_List)
 
-    MonthsList = []
-    PL_List =[]
-    MonthlyChangeList = []
+while counter < number_of_stored_pl_values-1:
+    balance = int(Profit_Loss_List[int(counter)+1])-int(Profit_Loss_List[int(counter)])
 
+    if max_change == "none":
+        max_change = balance
+        max_month = Months_List[int(counter+1)]
+    elif balance > max_change:
+        max_change = balance
+        max_month = Months_List[int(counter+1)]
 
-    for row in csvreader:
-        
-    
+    if min_change == "none":
+        min_change = balance
+        min_month = Months_List[int(counter+1)]
+    elif balance < min_change:
+        min_change = balance
+        min_month = Months_List[int(counter+1)]
 
-        
-#Total number of months
-        months = months+1
-        print("Total Months:" + str(months))
-#Total Profit/Losses
-        PL_List.append(row[1])
-        MonthsList.append(row[0])
-        NetTotal = int(NetTotal) + int(row[1])
-        print("Total:"+ str(NetTotal))
-#Average     
+    Monthly_Change_List.append(balance)
+    counter = counter + 1
 
-while counter< len(PL_List)-1:
-        currentbalance = int(PL_List[int(counter)+1])-int(PL_List[int(counter)])
+for value in Monthly_Change_List:
+    Sum_of_Monthly_Change = Sum_of_Monthly_Change + value
 
-    
+Average_Change = (Sum_of_Monthly_Change/len(Monthly_Change_List))
+Floated_Average_Change = "{:.2f}".format(Average_Change)
+print("Financial Analysis")
+print("----------------------------------------------------------")
+print(f"Total Months: {len(Profit_Loss_List)}")
+print(f"Total: ${total_amount} ")
+print(f"Average Change: ${Floated_Average_Change}")
+print(f"Greatest Increase in Profits: {max_month}  (${max_change})")
+print(f"Greatest Decrease in Profits: {min_month}  (${min_change})")
+print("----------------------------------------------------------")
