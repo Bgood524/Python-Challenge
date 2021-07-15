@@ -19,10 +19,12 @@ with open(csvpath) as csvfile:
     months = 0
     NetTotal = 0
     MonthlyChangeSum = 0
+    counter = 0
 
     MonthsList = []
-    PLChangeList =[]
-    
+    PL_List =[]
+    MonthlyChangeList = []
+
 
     for row in csvreader:
         
@@ -30,16 +32,16 @@ with open(csvpath) as csvfile:
 
         
 #Total number of months
-        months+=1
+        months = months+1
         print("Total Months:" + str(months))
 #Total Profit/Losses
-        NetTotal += int(row[1])
+        PL_List.append(row[1])
+        MonthsList.append(row[0])
+        NetTotal = int(NetTotal) + int(row[1])
         print("Total:"+ str(NetTotal))
 #Average     
 
-while MonthlyChangeSum> 0:
-    currentbalance = int()
-Average = NetTotal/months
-print("Average Change:"+ str(Average))
-#Increase/Decrease
-print(int(row[2])-int(row[1]))
+while counter< len(PL_List)-1:
+        currentbalance = int(PL_List[int(counter)+1])-int(PL_List[int(counter)])
+
+    
