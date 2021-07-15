@@ -6,7 +6,7 @@ from typing import Counter
 csvpath = os.path.join('Resources', 'budget_data.csv')
 print(csvpath)
 
-month = []
+
 
 
 with open(csvpath) as csvfile:
@@ -18,6 +18,12 @@ with open(csvpath) as csvfile:
     print(f"CSV Header: {csv_header}")
     months = 0
     NetTotal = 0
+    MonthlyChangeSum = 0
+
+    MonthsList = []
+    PLChangeList =[]
+    
+
     for row in csvreader:
         
     
@@ -25,8 +31,15 @@ with open(csvpath) as csvfile:
         
 #Total number of months
         months+=1
-        print(months)
+        print("Total Months:" + str(months))
 #Total Profit/Losses
         NetTotal += int(row[1])
-        print(NetTotal)
-    
+        print("Total:"+ str(NetTotal))
+#Average     
+
+while MonthlyChangeSum> 0:
+    currentbalance = int()
+Average = NetTotal/months
+print("Average Change:"+ str(Average))
+#Increase/Decrease
+print(int(row[2])-int(row[1]))
