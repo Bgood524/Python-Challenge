@@ -9,3 +9,12 @@ with open(csvpath) as csvfile:
 
     csv_header = next(csvreader)
     print(f"CSV Header: {csv_header}")
+
+    
+    candidates = []
+
+
+    
+    for row in csvreader:
+        candidate = row[2]
+        candidates.append(candidate)
