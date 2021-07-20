@@ -59,3 +59,18 @@ print("O'Tooley: " + str(OTooley_percentage) + "% ("  + str(OTooley_count) + ")"
 print("----------------------------------------------------------")
 print("Winner:" + str(winner))
 print("----------------------------------------------------------")
+
+#txt output
+
+with open('election_analysis.txt', 'w') as analysis:
+     analysis.write("---------------------------------------------------------\n")
+     analysis.write("Election Results\n")
+     analysis.write("----------------------------------------------------------\n")
+     analysis.write("Total Votes: " + str(row_count))
+     analysis.write("Khan: " + str(Khan_percentage) + "% ("  + str(Khan_count) + ")\n")
+     analysis.write("Correy: " + str(Correy_percentage) + "% ("  + str(Correy_count) + ")\n")
+     analysis.write("Li: " + str(Li_percentage) + "% ("  + str(Li_count) + ")\n")
+     analysis.write("O'Tooley: " + str(OTooley_percentage) + "% ("  + str(OTooley_count) + ")\n")
+     analysis.write("----------------------------------------------------------\n")
+     analysis.write("Winner:" + str(winner) + "\n")
+     analysis.write("----------------------------------------------------------\n")
